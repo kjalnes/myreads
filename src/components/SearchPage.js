@@ -13,11 +13,19 @@ class SearchPage extends Component {
         this.setState({query: event.target.value})
     }
 
+    removeExistingBooks(books) {
+        const existingBookIds = this.props.books.map( book => book.id)
+        return books && books.length ?
+            books.filter( _book => existingBookIds.indexOf(_book.id) === -1)
+            : []
+    }
+
     componentWillUpdate(nextProps, nextState) {
         if(nextState.query !== this.state.query && nextState.query) {
             BooksAPI.search(nextState.query, 20)
                 .then( books => {
-                    this.setState({books})
+                    // remove books that exist in shelves
+                    this.setState({books: this.removeExistingBooks(books)})
                 })
         }
     }
@@ -43,7 +51,10 @@ class SearchPage extends Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <Books books={books} updateBook={updateBook} addBook={true} />
+                    { books && books.length ?
+                        <Books books={books} updateBook={updateBook} addBook={true} />
+                        : null
+                    }
                 </div>
             </div>
         )

@@ -27,16 +27,12 @@ class BooksApp extends React.Component {
     updateBook = (book, shelf, addBook) => {
         BooksAPI.update(book, shelf)
             .then( () => {
-                if(shelf === 'none') {
-                    // remove existing book
-                    this.setState({ books: this.removeBook(book.id) })
-                } else if(addBook === true) {
-                    // add new book to shelves
-                    this.setState({ books: this.addBook(book, shelf) })
-                } else {
-                    //  update existing book
-                    this.setState({books: this.updateExistingBook(book, shelf) })
-                }
+                const books =
+                shelf === 'none' ? this.removeBook(book.id) // remove existing book
+                : addBook === true ? this.addBook(book, shelf) // add new book to shelves
+                : this.updateExistingBook(book, shelf); //  update existing book
+                this.setState({books})
+
             })
             .catch('Error updating books');
     }

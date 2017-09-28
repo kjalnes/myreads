@@ -4,8 +4,7 @@ const Book = ({ book, updateBook, addBook }) => {
 
     const onChange = (event) => {
         const newShelf = event.target.value;
-        // addBook determines wether book should be added to my library or not
-        updateBook(book, newShelf, addBook)
+        updateBook(book, newShelf, addBook);
     }
 
     return (
@@ -25,7 +24,10 @@ const Book = ({ book, updateBook, addBook }) => {
                     </div>
                 <div className="book-title">{book.title}</div>
                 <div className="book-authors">
-                    { book.authors ? book.authors.map( author => author).join(', ') : '' }
+                    {   book && book.authors ?
+                        book.authors.map( author => author).join(', ')
+                        : ''
+                    }
                 </div>
             </div>
       </li>
