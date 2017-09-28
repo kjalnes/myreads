@@ -2,7 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Shelf from './Shelf';
 
-const MainPage = ({books, sortBooks, updateBook}) => {
+const MainPage = ({books, updateBook}) => {
+
+    const sortBooks = (books) => {
+        let categories = {
+            currentlyReading: { title: 'Currently Reading', books: [] },
+            wantToRead: { title: 'Want to Read', books:[] },
+            read: { title: 'Read', books:[] }
+        }
+
+        books.forEach( book => categories[book.shelf].books.push(book));
+        return [categories.currentlyReading, categories.wantToRead, categories.read];
+    }
 
     return (
         <div className="list-books">
