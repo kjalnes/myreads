@@ -13,39 +13,48 @@ class BooksApp extends React.Component {
         this.updateBook = this.updateBook.bind(this);
     }
 
-    sortBooks(books) {
+    sortBooks = (books) => {
         let categories = {
             currentlyReading: {title: 'Currently Reading', books: []},
             wantToRead: {title: 'Want to Read', books:[]},
             read: {title: 'Read', books:[]}
         }
 
-        books.forEach( book => categories[book.shelf].books.push(book))
+        books.forEach( book => categories[book.shelf].books.push(book));
         return [categories.currentlyReading, categories.wantToRead, categories.read];
     }
 
-    updateBook(book, shelf) {
+    updateBook = (book, shelf, addBook) => {
         BooksAPI.update(book, shelf)
-            .then( result => {
-                // assuming API call is successful
+            .then( () => {
                 if(shelf === 'none') {
-                    // remove book from UI
-                    this.setState( prevState => ({
-                        books: prevState.books.filter( _book => _book.id !== book.id)
-                    }))
+                    // remove existing book
+                    this.setState({ books: this.removeBook(book.id) })
+                } else if(addBook === true) {
+                    // add new book to shelves
+                    this.setState({ books: this.addBook(book, shelf) })
                 } else {
-                    this.setState( prevState => {
-                        prevState.books.map( _book => {
-                            //  update shelf
-                            if (_book.id === book.id) {
-                                _book.shelf = shelf
-                            }
-                            return _book
-                        })
-                    })
+                    //  update existing book
+                    this.setState({books: this.updateExistingBook(book, shelf) })
                 }
             })
             .catch('Error updating books');
+    }
+
+    removeBook = (id) => this.state.books.filter( _book => _book.id !== id)
+
+    addBook = (book, shelf) => {
+        book.shelf = shelf;
+        return this.state.books.concat([book])
+    }
+
+    updateExistingBook = (book, shelf) => {
+        return this.state.books.map( _book => {
+            if (_book.id === book.id) {
+                _book.shelf = shelf
+            }
+            return _book
+        })
     }
 
     componentDidMount() {

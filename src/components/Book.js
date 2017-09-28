@@ -1,10 +1,11 @@
 import React from 'react';
 
-const Book = ({ book, updateBook }) => {
+const Book = ({ book, updateBook, addBook }) => {
 
     const onChange = (event) => {
         const newShelf = event.target.value;
-        updateBook(book, newShelf)
+        // addBook determines wether book should be added to my library or not
+        updateBook(book, newShelf, addBook)
     }
 
     return (
@@ -13,7 +14,7 @@ const Book = ({ book, updateBook }) => {
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
                         <div className="book-shelf-changer">
-                          <select onChange={onChange} value={book.shelf}>
+                          <select onChange={onChange} value={book.shelf || 'none'}>
                             <option value="none" disabled >Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>

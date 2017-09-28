@@ -1,14 +1,15 @@
 import React from 'react';
 import Book from './Book';
 
-const Books = ({books, updateBook}) => (
+const Books = ({books, updateBook, addBook}) => (
     <ol className="books-grid">
         {
             books && books.length ? books.map( (_book, index) => (
                 <Book
                     key={index}
                     book={_book}
-                    updateBook={updateBook}/>
+                    updateBook={updateBook}
+                    addBook={addBook}/>
             )) : ''
         }
     </ol>

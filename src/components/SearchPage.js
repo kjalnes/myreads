@@ -43,7 +43,7 @@ class SearchPage extends Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <Books books={books} updateBook={updateBook} />
+                    <Books books={books} updateBook={updateBook} addBook={true} />
                 </div>
             </div>
         )
