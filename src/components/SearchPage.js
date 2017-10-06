@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as BooksAPI from '../BooksAPI';
 import Books from './Books';
+
 
 class SearchPage extends Component {
     state = {
@@ -13,6 +15,7 @@ class SearchPage extends Component {
         this.setState({query: event.target.value})
     }
 
+    // Ensure that a book cannot be added to the myReads library twice
     removeExistingBooks(books) {
         const existingBookIds = this.props.books.map( book => book.id)
         return books && books.length ?
@@ -52,13 +55,21 @@ class SearchPage extends Component {
                 </div>
                 <div className="search-books-results">
                     { books && books.length ?
-                        <Books books={books} updateBook={updateBook} addBook={true} />
+                        <Books
+                            books={books}
+                            updateBook={updateBook}
+                            addBook={true} />
                         : null
                     }
                 </div>
             </div>
         )
     }
+}
+
+SearchPage.propTypes = {
+    books: PropTypes.array,
+    updateBook: PropTypes.func.isRequired
 }
 
 export default SearchPage;

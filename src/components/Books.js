@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Book from './Book';
+
 
 const Books = ({books, updateBook, addBook}) => (
     <ol className="books-grid">
@@ -15,5 +17,10 @@ const Books = ({books, updateBook, addBook}) => (
     </ol>
 )
 
+Books.propTypes = {
+    books: PropTypes.array,
+    updateBook: PropTypes.func,
+    addBook: PropTypes.bool
+}
 
 export default Books;

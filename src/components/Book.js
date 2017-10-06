@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 
 const Book = ({ book, updateBook, addBook }) => {
 
@@ -33,5 +35,12 @@ const Book = ({ book, updateBook, addBook }) => {
       </li>
     )
 }
+
+Book.propTypes = {
+    books: PropTypes.array,
+    updateBook: PropTypes.func,
+    addBook: PropTypes.bool
+}
+
 
 export default Book;

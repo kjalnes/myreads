@@ -1,16 +1,15 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import './App.css'
 import { Route } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import MainPage from './components/MainPage';
 import SearchPage from './components/SearchPage';
 
+
 class BooksApp extends React.Component {
-    constructor() {
-        super();
-        this.state = { books: [] }
-        this.updateBook = this.updateBook.bind(this);
-    }
+
+    state = { books: [] }
 
     updateBook = (book, shelf, addBook) => {
         BooksAPI.update(book, shelf)
@@ -63,6 +62,13 @@ class BooksApp extends React.Component {
             </div>
         )
     }
+}
+
+// Question: Should PropTypes that get passed down to children be defined on each level or is it enough to define it in the parent component?
+
+BooksApp.propTypes = {
+    books: PropTypes.array,
+    updateBook: PropTypes.func
 }
 
 export default BooksApp;
