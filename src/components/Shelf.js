@@ -11,14 +11,15 @@ const Shelf = ({title, books, updateBook}) => {
                 <Books books={books} updateBook={updateBook} />
             </div>
         </div>
-    )
+    );
 }
 
 
 export default Shelf;
 
+
 Shelf.propTypes = {
     title: PropTypes.string.isRequired,
     books: PropTypes.array,
     updateBook: PropTypes.func.isRequired
-}
+};

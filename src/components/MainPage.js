@@ -11,11 +11,11 @@ const MainPage = ({books, updateBook}) => {
             currentlyReading: { title: 'Currently Reading', books: [] },
             wantToRead: { title: 'Want to Read', books:[] },
             read: { title: 'Read', books:[] }
-        }
+        };
 
         books.forEach( book => categories[book.shelf].books.push(book));
         return [categories.currentlyReading, categories.wantToRead, categories.read];
-    }
+    };
 
     return (
         <div className="list-books">
@@ -37,13 +37,14 @@ const MainPage = ({books, updateBook}) => {
                 <Link to='/search'>Add a book</Link>
             </div>
         </div>
-    )
-}
+    );
+};
+
 
 MainPage.propTypes = {
     books: PropTypes.array,
     updateBook: PropTypes.func.isRequired
-}
+};
 
 
 export default MainPage;

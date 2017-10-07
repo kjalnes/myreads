@@ -12,7 +12,7 @@ class SearchPage extends Component {
     }
 
     onChange = (event) => {
-        this.setState({query: event.target.value})
+        this.setState({query: event.target.value});
     }
 
     // Ensure that a book cannot be added to the myReads library twice
@@ -28,7 +28,7 @@ class SearchPage extends Component {
             BooksAPI.search(nextState.query, 20)
                 .then( books => {
                     // remove books that exist in shelves
-                    this.setState({books: this.removeExistingBooks(books)})
+                    this.setState({books: this.removeExistingBooks(books)});
                 })
         }
     }
@@ -63,13 +63,13 @@ class SearchPage extends Component {
                     }
                 </div>
             </div>
-        )
+        );
     }
 }
 
 SearchPage.propTypes = {
     books: PropTypes.array,
     updateBook: PropTypes.func.isRequired
-}
+};
 
 export default SearchPage;

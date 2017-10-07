@@ -15,12 +15,14 @@ const Books = ({books, updateBook, addBook}) => (
             )) : ''
         }
     </ol>
-)
+);
+
 
 Books.propTypes = {
     books: PropTypes.array,
     updateBook: PropTypes.func,
     addBook: PropTypes.bool
-}
+};
+
 
 export default Books;

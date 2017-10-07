@@ -7,7 +7,7 @@ const Book = ({ book, updateBook, addBook }) => {
     const onChange = (event) => {
         const newShelf = event.target.value;
         updateBook(book, newShelf, addBook);
-    }
+    };
 
     return (
         <li>
@@ -34,13 +34,14 @@ const Book = ({ book, updateBook, addBook }) => {
             </div>
       </li>
     )
-}
+};
+
 
 Book.propTypes = {
     books: PropTypes.array,
     updateBook: PropTypes.func,
     addBook: PropTypes.bool
-}
+};
 
 
 export default Book;

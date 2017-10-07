@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import PropTypes from 'prop-types';
-import './App.css'
+import './App.css';
 import { Route } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import MainPage from './components/MainPage';
@@ -19,7 +19,7 @@ class BooksApp extends React.Component {
                 : addBook === true ? this.addBook(book, shelf) // add new book to shelves
                 : this.updateExistingBook(book, shelf); //  update existing book
 
-                this.setState({books})
+                this.setState({books});
             })
             .catch('Error updating books');
     }
@@ -28,21 +28,21 @@ class BooksApp extends React.Component {
 
     addBook = (book, shelf) => {
         book.shelf = shelf;
-        return this.state.books.concat([book])
+        return this.state.books.concat([book]);
     }
 
     updateExistingBook = (book, shelf) => {
         return this.state.books.map( _book => {
             if (_book.id === book.id) {
-                _book.shelf = shelf
+                _book.shelf = shelf;
             }
-            return _book
+            return _book;
         })
     }
 
     componentDidMount() {
         BooksAPI.getAll().then( books => {
-            this.setState({books})
+            this.setState({books});
         });
     }
 
@@ -69,6 +69,7 @@ class BooksApp extends React.Component {
 BooksApp.propTypes = {
     books: PropTypes.array,
     updateBook: PropTypes.func
-}
+};
+
 
 export default BooksApp;
